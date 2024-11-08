@@ -136,7 +136,13 @@ int main(int argc, char **argv){
 	 */
 	vranlc(0, &dum[0], dum[1], &dum[2]);
 	dum[0] = randlc(&dum[1], dum[2]);
-	for(i=0; i<NK_PLUS; i++){x[i] = -1.0e99;}
+
+	#pragma omp parallel for private(x) schedule(dynamic)
+		for(i=0; i<NK_PLUS; i++)
+		{
+			x[i] = -1.0e99;
+		}
+
 	Mops = log(sqrt(fabs(max(1.0, 1.0))));
 
 	timer_clear(0);
@@ -151,6 +157,7 @@ int main(int argc, char **argv){
 
 	t1 = A;
 
+	// Candidato a paralelização
 	for(i=0; i<MK+1; i++){
 		t2 = randlc(&t1, t1);
 	}
@@ -161,6 +168,7 @@ int main(int argc, char **argv){
 	sx = 0.0;
 	sy = 0.0;
 
+	// Candidato a paralelização
 	for(i=0; i<=NQ-1; i++){
 		q[i] = 0.0;
 	}
@@ -172,11 +180,12 @@ int main(int argc, char **argv){
 	 */
 	k_offset = -1;
 
+	// Candidato a paralelização
 	for(k=1; k<=np; k++){
 		kk = k_offset + k;
 		t1 = S;
 		t2 = an;
-
+		// Candidato a paralelização
 		/* find starting seed t1 for this kk */
 		for(i=1; i<=100; i++){
 			ik = kk / 2;
@@ -199,6 +208,7 @@ int main(int argc, char **argv){
 
 		if(timers_enabled){timer_start(1);}
 
+	// Candidato a paralelização
 		for(i=0; i<NK; i++){
 			x1 = 2.0 * x[2*i] - 1.0;
 			x2 = 2.0 * x[2*i+1] - 1.0;

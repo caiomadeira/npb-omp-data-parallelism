@@ -146,7 +146,8 @@ static boolean timers_enabled;
 static boolean debug;
 
 /* function prototypes */
-static void cffts1(int is,
+
+static void __attribute__ ((noinline)) cffts1(int is,
 		int d1,
 		int d2,
 		int d3,
@@ -154,7 +155,7 @@ static void cffts1(int is,
 		void* pointer_xout,
 		dcomplex y1[][FFTBLOCKPAD],
 		dcomplex y2[][FFTBLOCKPAD]);
-static void cffts2(int is,
+static void __attribute__ ((noinline)) cffts2(int is,
 		int d1,
 		int d2,
 		int d3,
@@ -162,7 +163,7 @@ static void cffts2(int is,
 		void* pointer_xout,
 		dcomplex y1[][FFTBLOCKPAD],
 		dcomplex y2[][FFTBLOCKPAD]);
-static void cffts3(int is,
+static void __attribute__ ((noinline)) cffts3(int is,
 		int d1,
 		int d2,
 		int d3,
@@ -170,35 +171,35 @@ static void cffts3(int is,
 		void* pointer_xout,
 		dcomplex y1[][FFTBLOCKPAD],
 		dcomplex y2[][FFTBLOCKPAD]);
-static void cfftz(int is,
+static void __attribute__ ((noinline)) cfftz(int is,
 		int m,
 		int n,
 		dcomplex x[][FFTBLOCKPAD],
 		dcomplex y[][FFTBLOCKPAD]);
-static void checksum(int i,
+static void __attribute__ ((noinline)) checksum(int i,
 		void* pointer_u1,
 		int d1,
 		int d2,
 		int d3);
-static void compute_indexmap(void* pointer_twiddle,
+static void __attribute__ ((noinline)) compute_indexmap(void* pointer_twiddle,
 		int d1,
 		int d2,
 		int d3);
-static void compute_initial_conditions(void* pointer_u0,
+static void __attribute__ ((noinline)) compute_initial_conditions(void* pointer_u0,
 		int d1,
 		int d2,
 		int d3);
-static void evolve(void* pointer_u0,
+static void __attribute__ ((noinline)) evolve(void* pointer_u0,
 		void* pointer_u1,
 		void* pointer_twiddle,
 		int d1,
 		int d2,
 		int d3);
-static void fft(int dir,
+static void __attribute__ ((noinline)) fft(int dir,
 		void* pointer_x1,
 		void* pointer_x2);
-static void fft_init(int n);
-static void fftz2(int is,
+static void __attribute__ ((noinline)) fft_init(int n);
+static void __attribute__ ((noinline)) fftz2(int is,
 		int l,
 		int m,
 		int n,
